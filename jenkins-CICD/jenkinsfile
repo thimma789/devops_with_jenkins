@@ -1,23 +1,12 @@
 node {
-stage('git checkout') {
-git branch: 'jenkins', url: 'https://github.com/thimma789/devops_with_jenkins.git'
-}
+    
+git branch: 'main', url: 'https://github.com/thimma789/devops_with_jenkins.git'
 
-stage('mvn clean') {
-mvn clean -f o2-jenkins/petclinic-code/pom.xml
-}
+sh 'mvn clean -f 02-Jenkins/petclinic-code/pom.xml'
+sh 'mvn compile -f 02-Jenkins/petclinic-code/pom.xml'
+sh 'mvn test -f 02-Jenkins/petclinic-code/pom.xml'
+sh 'mvn package -f 02-Jenkins/petclinic-code/pom.xml'
 
-stage('mvn complining') {
-mvn compile -f o2-jenkins/petclinic-code/pom.xml
-}
-
-stage('testing') {
-mvn test -f o2-jenkins/petclinic-code/pom.xml
-}
-
-stage('packaging') {
-mvn package -f o2-jenkins/petclinic-code/pom.xml
-}
-
+archive '02-Jenkins/petclinic-code/target/*.war'
 
 }
