@@ -1,0 +1,23 @@
+node {
+stage('git checkout') {
+git branch: 'jenkins', url: 'https://github.com/thimma789/devops_with_jenkins.git'
+}
+
+stage('mvn clean') {
+mvn clean -f o2-jenkins/petclinic-code/pom.xml
+}
+
+stage('mvn complining') {
+mvn compile -f o2-jenkins/petclinic-code/pom.xml
+}
+
+stage('testing') {
+mvn test -f o2-jenkins/petclinic-code/pom.xml
+}
+
+stage('packaging') {
+mvn package -f o2-jenkins/petclinic-code/pom.xml
+}
+
+
+}
