@@ -1,7 +1,7 @@
 node {
 
 stage('Git CheckOut') {    
-git branch: 'main', url: 'https://github.com/thimma789/devops_with_jenkins.git'
+git branch: 'main', url: 'https://github.com/amitvashisttech/devops-accenture-2020Oct12.git'
 }
 
 def project_path = "02-Jenkins/petclinic-code"

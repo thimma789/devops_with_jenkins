@@ -26,10 +26,5 @@ sh 'mvn package'
 stage('Archiving Artifacts') {    
 archive 'target/*.war'
 }
-
-stage('Deploy Petclinic Code into Docker Env.') {
-sh 'docker-compose up -d --build'
-}
-
 }
 }
