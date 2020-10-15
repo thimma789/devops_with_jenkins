@@ -2,32 +2,30 @@ node {
 
 notify('Started')
 
-try {
-
-stage('Git CheckOut') {
+stage('Git CheckOut') {    
 git branch: 'main', url: 'https://github.com/thimma789/devops_with_jenkins.git'
 }
 
 def project_path = "02-Jenkins/petclinic-code"
 dir(project_path) {
 
-stage('Maven Clean') {
+stage('Maven Clean') {    
 sh 'mvn clean'
 }
 
-stage('Maven Compiling') {
-sh 'mvn compiless'
+stage('Maven Compiling') {    
+sh 'mvn compile'
 }
 
-stage('Maven Testing') {
+stage('Maven Testing') {    
 sh 'mvn test'
 }
 
-stage('Maven Packaging ') {
+stage('Maven Packaging ') {    
 sh 'mvn package'
 }
 
-stage('Archiving Artifacts') {
+stage('Archiving Artifacts') {    
 archive 'target/*.war'
 }
 
@@ -38,22 +36,15 @@ sh 'docker-compose up -d --build'
 }
 
 notify('Done')
-} catch(err){
-  notify("Error ${err}")
-  currentBuild.result = 'FAILURE'
-}
-
-
 }
 
 
 def notify(status){
-   emailext (
-      to: "amitvashist7@outlook.com",
+   emailext ( 
+      to: "thimma203@gmail.com",
       subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
       body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
             <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMVER}]</a></p>""",
 
    )
   }
-
