@@ -1,7 +1,5 @@
 node {
 
-notify('Started')
-
 stage('Git CheckOut') {    
 git branch: 'main', url: 'https://github.com/thimma789/devops_with_jenkins.git'
 }
@@ -34,17 +32,4 @@ sh 'docker-compose up -d --build'
 }
 
 }
-
-notify('Done')
 }
-
-
-def notify(status){
-   emailext ( 
-      to: "thimma203@gmail.com",
-      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMVER}]</a></p>""",
-
-   )
-  }
